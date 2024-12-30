@@ -1,19 +1,9 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 
 function App(): React.JSX.Element {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>Hello, World! </Text>
-    </SafeAreaView>
-  );
+  return <SafeAreaView></SafeAreaView>;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-});
-
+const styles = StyleSheet.create({});
 export default App;

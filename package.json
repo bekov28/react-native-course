@@ -1,5 +1,5 @@
 {
-  "name": "MyApp",
+  "name": "my-app",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "metro": "^0.81.0",
+    "metro-file-map": "^0.81.0",
     "react": "18.3.1",
     "react-native": "0.76.5"
   },
