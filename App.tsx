@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  FlatList,
   Pressable,
   SafeAreaView,
   Text,
@@ -8,12 +9,18 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import {TodoItem} from './src/components';
 
 function App(): React.JSX.Element {
-  const [value, setvalue] = useState<string>('');
+  const [value, setValue] = useState<string>('');
   const [todos, setTodos] = useState<string[]>([]);
 
-  console.log(value);
+  const handleAddTodo = () => {
+    if (value) {
+      setTodos([...todos, value]);
+      setValue('');
+    }
+  };
 
   return (
     <SafeAreaView style={$container}>
@@ -23,14 +30,25 @@ function App(): React.JSX.Element {
           placeholder="Enter name"
           numberOfLines={1}
           value={value}
-          onChangeText={setvalue}
+          onChangeText={setValue}
           style={$input}
           placeholderTextColor={'#000'}
         />
-        <Pressable style={$button}>
+        <Pressable style={$button} onPress={handleAddTodo}>
           <Text style={{color: 'white'}}>Add</Text>
         </Pressable>
       </View>
+      <FlatList
+        contentContainerStyle={$itemContainer}
+        data={todos}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index}) => (
+          <TodoItem
+            item={item}
+            onDelete={() => setTodos(todos.filter((_, i) => i! == index))}
+          />
+        )}
+      />
     </SafeAreaView>
   );
 }
@@ -87,6 +105,11 @@ const $row: ViewStyle = {
   flexDirection: 'row',
   alignItems: 'stretch',
   gap: 16,
+};
+const $itemContainer: ViewStyle = {
+  marginTop: 16,
+  paddingHorizontal: 16,
+  gap: 8,
 };
 
 export default App;
