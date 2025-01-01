@@ -1,16 +1,27 @@
-import {Image, ImageStyle, Pressable, Text, ViewStyle} from 'react-native';
+import {useState} from 'react';
+import {
+  Image,
+  ImageStyle,
+  Pressable,
+  Text,
+  TextStyle,
+  ViewStyle,
+} from 'react-native';
 
 type TodoItemProps = {
   item: string;
-
-  onDelete: () => void;
+  index: number;
 };
 
-export const TodoItem = ({item, onDelete}: TodoItemProps) => {
+export const TodoItem = ({item, index}: TodoItemProps) => {
+  const [isDone, setIsDone] = useState<Boolean>(false);
+
   return (
     <Pressable style={$row}>
-      <Text>{item}</Text>
-      <Pressable>
+      <Text style={[isDone && $done]}>
+        {index + 1}. {item}
+      </Text>
+      <Pressable onPress={() => setIsDone(!isDone)}>
         <Image source={require('../assets/trash.png')} style={$trash} />
       </Pressable>
     </Pressable>
@@ -25,4 +36,8 @@ const $row: ViewStyle = {
   flexDirection: 'row',
   justifyContent: 'space-between',
   paddingRight: 10,
+};
+
+const $done: TextStyle = {
+  textDecorationLine: 'line-through',
 };

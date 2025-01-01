@@ -24,7 +24,7 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={$container}>
-      <Text style={$title}>Todo App</Text>
+      <Text style={$title}>Todo tasks</Text>
       <View style={$row}>
         <TextInput
           placeholder="Enter name"
@@ -42,12 +42,7 @@ function App(): React.JSX.Element {
         contentContainerStyle={$itemContainer}
         data={todos}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item, index}) => (
-          <TodoItem
-            item={item}
-            onDelete={() => setTodos(todos.filter((_, i) => i! == index))}
-          />
-        )}
+        renderItem={({item, index}) => <TodoItem item={item} index={index} />}
       />
     </SafeAreaView>
   );
@@ -108,7 +103,7 @@ const $row: ViewStyle = {
 };
 const $itemContainer: ViewStyle = {
   marginTop: 16,
-  paddingHorizontal: 16,
+  paddingHorizontal: 20,
   gap: 8,
 };
 
